@@ -1,0 +1,22 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.chat {
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.message-box {
+  background-color: rgb(20, 177, 20);
+  color: #fff;
+  border-radius: 0.2rem;
+  display: flex;
+  justify-content: start;
+}
