@@ -10,7 +10,7 @@ export function useChatSocket() {
   useEffect(() => {
     if (!isautenthicated) return;
 
-    const newSocket = io("http://localhost:3000", {
+    const newSocket = io("https://dialogue-production.up.railway.app/", {
       withCredentials: true,
       autoConnect: true,
     });

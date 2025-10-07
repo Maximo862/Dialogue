@@ -1,8 +1,8 @@
-const PORT = 3000;
+const URL = "https://dialogue-production.up.railway.app/";
 
 export async function registerReq(user) {
   try {
-    const res = await fetch(`http://localhost:${PORT}/register`, {
+    const res = await fetch(`${URL}/register`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-type": "application/json" },
@@ -21,7 +21,7 @@ export async function registerReq(user) {
 
 export async function loginReq(user) {
   try {
-    const res = await fetch(`http://localhost:${PORT}/login`, {
+    const res = await fetch(`${URL}/login`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-type": "application/json" },
@@ -40,7 +40,7 @@ export async function loginReq(user) {
 
 export async function verifyReq() {
   try {
-    const res = await fetch(`http://localhost:${PORT}/verify`, {
+    const res = await fetch(`${URL}/verify`, {
       method: "GET",
       credentials: "include",
     });
@@ -56,7 +56,7 @@ export async function verifyReq() {
 }
 
 export async function modifyUser(id, username, icon) {
-  const res = await fetch(`http://localhost:${PORT}/${id}`, {
+  const res = await fetch(`${URL}/${id}`, {
     method: "PUT",
     credentials: "include",
     headers: { "Content-type": "application/json" },
@@ -71,7 +71,7 @@ export async function modifyUser(id, username, icon) {
 }
 
 export async function logoutReq() {
-  const res = await fetch(`http://localhost:${PORT}/logout`, {
+  const res = await fetch(`${URL}/logout`, {
     method: "POST",
     credentials: "include",
   });
