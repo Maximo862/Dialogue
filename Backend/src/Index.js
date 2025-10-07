@@ -23,19 +23,39 @@ app.use(
     credentials: true,
   })
 );
+
+
+app.options("*", cors());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Credentials", "true");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(logger("dev"));
 
+
 app.get("/", (req, res) => {
-  res.json({ message: "Backend running" });
+  res.json({ message: "Backend running " });
 });
 
 
 app.use(router);
 
-const server = createServer(app);
 
+const server = createServer(app);
 const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
