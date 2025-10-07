@@ -1,4 +1,4 @@
-const { loginService, registerService } = require("../services/auth.Service");
+const { loginService, registerService } = require("../Services/auth.Service");
 
 async function login(req, res) {
   try {
