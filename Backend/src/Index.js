@@ -10,56 +10,23 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://dialogue-chatmk.vercel.app",
-];
-
+app.use(express.json());
 app.use(
   cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: ["http://localhost:5173", "https://dialogue-chatmk.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
-
-
-app.options("*", cors());
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", req.headers.origin || "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Credentials", "true");
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  }
-  next();
-});
-
-
-app.use(express.json());
 app.use(cookieParser());
-app.use(logger("dev"));
-
-
-app.get("/", (req, res) => {
-  res.json({ message: "Backend running " });
-});
-
-
 app.use(router);
-
+app.use(logger("dev"));
 
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: ["http://localhost:5173", "https://dialogue-chatmk.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   },
 });
@@ -67,6 +34,7 @@ const io = new Server(server, {
 handleChat(io);
 
 const PORT = process.env.PORT || 3000;
+
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`puert: http://localhost:${PORT}`);
 });
