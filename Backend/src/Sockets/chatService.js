@@ -22,7 +22,6 @@ async function createMessage(content, validateduser) {
 async function handleUpdateMessage(id, validateduserid, content) {
   const [rows] = await selectMessagesOfUser(id, validateduserid);
   if (rows.length === 0) {
-    console.log("invalid request");
     return null;
   }
 
@@ -33,7 +32,6 @@ async function handleUpdateMessage(id, validateduserid, content) {
 async function handleDelete(id, validateduserid) {
   const [rows] = await selectMessagesOfUser(id, validateduserid);
   if (rows.length === 0) {
-    console.log("invalid request");
     return null;
   }
 

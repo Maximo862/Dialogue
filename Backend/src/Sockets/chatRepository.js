@@ -2,7 +2,7 @@ const { pool } = require("../Db/Db");
 
 async function callMessages() {
   return pool.execute(
-    "SELECT m.*, u.username, u.icon FROM messages m INNER JOIN users u ON m.user_id = u.id"
+    "SELECT m.*, u.username, u.icon FROM messages m INNER JOIN users u ON m.user_id = u.id ORDER BY m.created_at ASC"
   );
 }
 

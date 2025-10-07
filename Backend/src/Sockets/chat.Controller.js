@@ -9,13 +9,10 @@ const {
 
 function handleChat(io) {
   io.on("connection", async (socket) => {
-    console.log("user has connected");
-
     const cookies = cookie.parse(socket.request.headers.cookie || "");
     const token = cookies.token;
     const validateduser = await verifyToken(token);
     if (!validateduser) {
-      console.log("Unauthorized");
       socket.disconnect();
       return;
     }
@@ -31,8 +28,6 @@ function handleChat(io) {
 
     socket.on("chat message", async (msg) => {
       try {
-        console.log("message : ", msg);
-
         const newMessage = await createMessage(msg, validateduser);
         if (!newMessage) return;
 

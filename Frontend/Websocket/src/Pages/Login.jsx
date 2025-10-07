@@ -1,43 +1,50 @@
-import { useState, useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../Context/Authcontext'
+import { useContext } from "react";
+import { AuthContext } from "../Context/Authcontext";
+import { FormCard } from "../Components/FormCard";
+import { useHandleForm } from "../Hooks/useHandleForm";
+import { useRedirect } from "../Hooks/useRedirect";
 
 export function Login() {
-  
-const navigate = useNavigate()
+  const { isautenthicated } = useContext(AuthContext);
 
-const {isautenthicated, HandleLogin} = useContext(AuthContext)
+  useRedirect({
+    condition: isautenthicated === true,
+    path: "/chatweb",
+    conditionRender: isautenthicated,
+  });
 
-useEffect(() => {
-if (isautenthicated === true) navigate("/chatweb")
-}, [isautenthicated])
+  const { Handlesubmit, setUser, user } = useHandleForm("login");
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
-  const user = {
-    email,
-    password
-  }
-
-async function Handlesubmit(e) {
-    e.preventDefault()
-await HandleLogin(user)
+  return (
+    <FormCard
+      Handlesubmit={Handlesubmit}
+      tittle={"Sign in to your account"}
+      inputs={
+        <>
+          <div className="input-container">
+            <input
+              type="email"
+              placeholder="Enter email"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+          </div>
+          <div className="input-container">
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+            />
+          </div>
+        </>
+      }
+      button={{
+        submit: "Sign in",
+        textRedirect: "No account?",
+        redirect: "Sign up",
+      }}
+      path={"/register"}
+    />
+  );
 }
-
-    return (
-    <section>
-<div>
-    <form onSubmit={Handlesubmit}>
-        <div>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email'/>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password'/>
-        </div>
-<button type='submit'>send</button>
-    </form>
-</div>
-
-    </section>
-  )
-}
-

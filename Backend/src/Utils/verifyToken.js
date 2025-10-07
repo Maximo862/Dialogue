@@ -10,11 +10,9 @@ async function verifyToken(token) {
     const [rows] = await pool.execute("SELECT * FROM users WHERE id = ?", [
       verifytok.id,
     ]);
-    if (rows.length === 0) return null; 
-
+    if (rows.length === 0) return null;
     return rows[0] || null;
   } catch (error) {
-  console.log("verify: ", error);
     return null;
   }
 }

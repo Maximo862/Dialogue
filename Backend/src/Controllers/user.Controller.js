@@ -10,7 +10,6 @@ async function verify(req, res) {
 
     return res.json({ message: "Valid token", validateduser });
   } catch (error) {
-    console.log("verify: ", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 }
@@ -26,7 +25,6 @@ async function modifyUser(req, res) {
 
     return res.json({ message: "user modified", newUser });
   } catch (error) {
-    console.error("modifyUser: ", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 }

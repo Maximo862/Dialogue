@@ -1,12 +1,44 @@
-# React + Vite
+# 🗨️ Dialogue App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Real-time chat application with user system, authentication, Socket.io integration, single-responsibility structure, and full CRUD for messages
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Technologies Used
 
-## Expanding the ESLint configuration
+- **Frontend:** React + Bootstrap 5  
+- **Backend:** Express.js + MySQL  
+- **Authentication:** JWT + bcrypt  
+- **State Management:** Context API + Custom Hooks  
+- **Dates:** Day.js  
+- **Deployment:** Railway (backend) + Vercel (frontend)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ⚙️ Main Features
+
+- User registration and login  
+- Edit and delete messages  
+- Display of each user's name and icon  
+- Chronological order by date (`ORDER BY created_at ASC`)    
+- Optimized global contexts (AuthContext, ChatContext)  
+- Custom hooks for forms and redirects  
+- Responsive design with Bootstrap 5 + React Icons 
+- Maintainable and clean code 
+
+---
+
+
+## 🧠 Learning and Challenges
+
+- Practiced managing **local and global states** in React.
+- Separation into **layers** such as services, repositories, and controllers.
+- Implemented real-time communication using **Socket.io**.
+
+---
+
+## 💬 Author
+
+### 👨‍💻 Maximo Kugler  
+📧 [rodri7.9.02313@gmail.com](mailto:rodri7.9.02313@gmail.com)  
+🔗 [LinkedIn](https://www.linkedin.com/in/maximo-kugler-716962379/)

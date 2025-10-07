@@ -18,7 +18,6 @@ async function login(req, res) {
       .json({
         message: "Successful login",
         user: { id: user.id, username: user.username, email, icon: user.icon },
-        token,
       });
   } catch (err) {
     return res.status(400).json({ error: err.message });

@@ -1,53 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from "react";
+import { io } from "socket.io-client";
+import { AuthContext } from "../Context/AuthContext";
 
 export function useChatSocket() {
+  const [messages, setMessages] = useState([]);
+  const [socket, setSocket] = useState(null);
+  const { isautenthicated } = useContext(AuthContext);
 
-    const [messages, setMessages] = useState([])
-     const [socket, setSocket] = useState(null);
+  useEffect(() => {
+    if (!isautenthicated) return;
 
-   useEffect(() => {
     const newSocket = io("http://localhost:3000", {
       withCredentials: true,
+      autoConnect: true,
     });
     setSocket(newSocket);
 
-    newSocket.on("user connected", (user) => {
-      setMessages((prev) => [
-        ...prev,
-        { connectedordisconected: `${user} has connected` },
-      ]);
-    });
-
-    newSocket.on("previousChat", (msgs) => {
-      setMessages(msgs);
-    });
-
-    newSocket.on("chat message", (msg) => {
-      console.log("message useeffect: ", msg);
-      setMessages((prev) => [...prev, msg]);
-    });
-
+    newSocket.on("previousChat", (msgs) => setMessages(msgs));
+    newSocket.on("chat message", (msg) =>
+      setMessages((prev) => [...prev, msg])
+    );
     newSocket.on("message updated", ({ id, content }) => {
       setMessages((prev) =>
-        prev.map((m) => (m.id === id ? { ...m, content: content } : m))
+        prev.map((m) => (m.id === id ? { ...m, content } : m))
       );
     });
-
     newSocket.on("message deleted", (id) => {
-      setMessages((prev) => prev.filter((m) => m.id != id));
+      setMessages((prev) => prev.filter((m) => m.id !== id));
     });
 
-    newSocket.on("user disconnected", (user) => {
-      setMessages((prev) => [
-        ...prev,
-        { connectedordisconected: `${user} has disconnected` },
-      ]);
-    });
+    return () => newSocket.disconnect();
+  }, [isautenthicated]);
 
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
+  function sendMessage(content) {
+    if (socket && content.trim()) socket.emit("chat message", content);
+  }
 
-  return {messages, setMessages, socket}
+  function updateMessage(id, content) {
+    if (socket && content.trim()) socket.emit("update message", id, content);
+  }
+
+  function deleteMessage(id) {
+    if (socket) socket.emit("delete message", id);
+  }
+
+  return { messages, sendMessage, updateMessage, deleteMessage };
 }

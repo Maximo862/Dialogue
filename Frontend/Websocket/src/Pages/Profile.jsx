@@ -16,8 +16,7 @@ export function Profile() {
   async function handleSave() {
     try {
       if (username.trim() || icon.trim()) {
-        const res = await handleModify(user.id, username, icon);
-        console.log(res);
+    await handleModify(user.id, username, icon);
       }
     } catch (error) {
       console.error(error);
@@ -71,6 +70,3 @@ export function Profile() {
     </div>
   );
 }
-
-//1 mostrar todos los iconos incluyendo los no seleccionados
-//2 mostrar el seleccionado seleccionado con un borde azul o algo asi...
