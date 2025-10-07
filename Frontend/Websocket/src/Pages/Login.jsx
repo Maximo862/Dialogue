@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../Context/Authcontext";
+import { AuthContext } from "../Context/AuthContext";
 import { FormCard } from "../Components/FormCard";
 import { useHandleForm } from "../Hooks/useHandleForm";
 import { useRedirect } from "../Hooks/useRedirect";
