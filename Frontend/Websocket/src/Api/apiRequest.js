@@ -1,4 +1,4 @@
-const URL = "https://dialogue-production.up.railway.app/";
+const URL = "https://dialogue-production.up.railway.app";
 
 export async function registerReq(user) {
   try {
