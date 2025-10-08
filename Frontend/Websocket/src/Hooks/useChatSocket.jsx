@@ -12,10 +12,13 @@ export function useChatSocket() {
 
     const newSocket = io("https://dialogue-production.up.railway.app", {
       withCredentials: true,
-      autoConnect: true,
+      transports: ["websocket"],
     });
     setSocket(newSocket);
 
+    newSocket.on("connect", () => {
+  console.log("✅ Socket connected:", newSocket.id);
+});
     newSocket.on("previousChat", (msgs) => setMessages(msgs));
     newSocket.on("chat message", (msg) =>
       setMessages((prev) => [...prev, msg])
@@ -28,7 +31,12 @@ export function useChatSocket() {
     newSocket.on("message deleted", (id) => {
       setMessages((prev) => prev.filter((m) => m.id !== id));
     });
-
+newSocket.on("connect_error", (err) => {
+  console.error("❌ Socket connection error:", err.message);
+});
+newSocket.on("disconnect", (reason) => {
+  console.log("⚠️ Socket disconnected:", reason);
+});
     return () => newSocket.disconnect();
   }, [isautenthicated]);
 
