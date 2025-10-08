@@ -9,10 +9,8 @@ const {
 
 function handleChat(io) {
   io.on("connection", async (socket) => {
-    console.log("🟢 New client connected:", socket.id);
     const cookies = cookie.parse(socket.request.headers.cookie || "");
     const token = cookies.token;
-    console.log("🍪 Cookies del socket:", socket.request.headers.cookie);
     const validateduser = await verifyToken(token);
     if (!validateduser) {
       socket.disconnect();
@@ -25,7 +23,6 @@ function handleChat(io) {
     socket.emit("previousChat", rows);
 
     socket.on("disconnect", () => {
-      console.log("🔴 Client disconnected:", socket.id);
       io.emit("user disconnected", validateduser.username);
     });
 
@@ -33,7 +30,6 @@ function handleChat(io) {
       try {
         const newMessage = await createMessage(msg, validateduser);
         if (!newMessage) return;
-        console.log("💬 Message received:", msg);
 
         io.emit("chat message", newMessage);
       } catch (err) {

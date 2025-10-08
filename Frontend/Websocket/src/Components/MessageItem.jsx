@@ -32,9 +32,7 @@ export function MessageItem({ m }) {
               <button
                 type="button"
                 onClick={() => {
-                  updateMessage(editing, newmessage),
-                    setEditing(null),
-                    showMessage("edit");
+                  updateMessage(editing, newmessage), setEditing(null);
                 }}
               >
                 SEND
@@ -72,7 +70,7 @@ export function MessageItem({ m }) {
                     className="dropdown-item text-danger"
                     type="button"
                     onClick={() => {
-                      deleteMessage(m.id), showMessage("delete");
+                      deleteMessage(m.id);
                     }}
                   >
                     Delete

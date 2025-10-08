@@ -24,11 +24,11 @@ app.use(logger("dev"));
 
 const server = createServer(app);
 const io = new Server(server, {
-  cors: ({
+  cors: {
     origin: ["http://localhost:5173", "https://dialoguemk.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-  })
+  },
 });
 
 handleChat(io);
