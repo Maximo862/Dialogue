@@ -42,3 +42,4 @@ Real-time chat application with user system, authentication, Socket.io integrati
 ### 👨‍💻 Maximo Kugler  
 📧 [rodri7.9.02313@gmail.com](mailto:rodri7.9.02313@gmail.com)  
 🔗 [LinkedIn](https://www.linkedin.com/in/maximo-kugler-716962379/)
+🔗 [Live](https://dialoguemk.vercel.app/)
