@@ -40,7 +40,7 @@ export function Register() {
           <div className="input-container">
             <input
               type="password"
-              placeholder="Enter password"
+              placeholder="Enter password(min 8 characters)"
               value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
